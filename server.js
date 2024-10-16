@@ -1,11 +1,43 @@
-const { createServer } = require('node:http');
-const hostname = 'localhost';
-const port = 3000;
-const server = createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
-});
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
+const express = require('express')
+const cors = require("cors");
+const port = 3000
+
+let message = "łączymy się z bazą danych...";
+
+const app = express();
+
+var corsOptions = {
+  origin: ["http://localhost:4200"],
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
+// parse requests of content-type - application/json
+app.use(express.json());
+
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
+const db = require("./app/models");
+
+db.sequelize.sync()
+  .then(() => {
+    message = "Synced db.";
+  })
+  .catch((err) => {
+    message = "Failed to sync db: " + err.message;
+  });
+
+app.get('/', (req, res) => {
+  res.send(message)
+})
+
+require("./app/routes/tutorial.routes")(app);
+require("./app/routes/version.routes")(app);
+require("./app/routes/location.routes")(app);
+require("./app/routes/simple-text.routes")(app);
+
+app.listen(port, () => {
+  console.log(message)
+})
