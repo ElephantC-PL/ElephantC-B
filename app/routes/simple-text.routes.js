@@ -5,7 +5,9 @@ module.exports = app => {
  
     router.post("/", simpleTexts.create);  
     
-    router.get("/", simpleTexts.findByLocationNVersion);
+    router.get("/", simpleTexts.find);
+
+    router.put("/", simpleTexts.update);
 
     app.use('/api/simple-texts', router);
   };
