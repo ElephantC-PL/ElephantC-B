@@ -3,11 +3,11 @@ module.exports = app => {
   
     var router = require("express").Router();    
  
-    router.post("/", simpleTexts.create);  
+    router.post("/", simpleTexts.find);
     
-    router.get("/", simpleTexts.find);
+    router.post("/create", simpleTexts.create);
 
-    router.put("/", simpleTexts.update);
+    router.put("/:id", simpleTexts.update);
 
     app.use('/api/simple-texts', router);
   };

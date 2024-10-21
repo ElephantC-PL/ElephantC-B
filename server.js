@@ -33,9 +33,9 @@ app.get('/', (req, res) => {
   res.send(message)
 })
 
-require("./app/routes/tutorial.routes")(app);
-require("./app/routes/version.routes")(app);
-require("./app/routes/location.routes")(app);
+//require("./app/routes/tutorial.routes")(app);
+//require("./app/routes/version.routes")(app);
+//require("./app/routes/location.routes")(app);
 require("./app/routes/simple-text.routes")(app);
 
 app.listen(port, () => {

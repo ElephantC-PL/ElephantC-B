@@ -1,14 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
     const SimpleText = sequelize.define("simple-text", {      
-        locationId: {
-            type: Sequelize.INTEGER,
-            references: 'locations', 
-            referencesKey: 'id'
+        sectionId: {
+            type: Sequelize.INTEGER,            
         },
         versionId: {
-            type: Sequelize.INTEGER,
-            references: 'versions',
-            referencesKey: 'id' 
+            type: Sequelize.INTEGER,         
+        },
+        location: {
+            type: Sequelize.STRING,         
         },
         value: {
             type: Sequelize.STRING

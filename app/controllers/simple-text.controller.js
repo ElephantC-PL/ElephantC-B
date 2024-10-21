@@ -4,7 +4,7 @@ const Op = db.Sequelize.Op;
 
 
 exports.create = (req, res) => {
-  if (!req.body.locationId) {
+  if (!req.body.sectionId) {
     res.status(400).send({
       message: "LocationId can not be empty!"
     });
@@ -16,7 +16,7 @@ exports.create = (req, res) => {
     });
     return;
   }
-  if (!req.body.locationId) {
+  if (!req.body.location) {
     res.status(400).send({
       message: "Value can not be empty!"
     });
@@ -24,8 +24,9 @@ exports.create = (req, res) => {
   }
 
   const simpleText = {
-    locationId: req.body.locationId,
+    sectionId: req.body.sectionId,
     versionId: req.body.versionId,
+    location: req.body.location,
     value: req.body.value
   };
   
@@ -43,7 +44,7 @@ exports.create = (req, res) => {
 
 exports.find = (req, res) => {
   condition = {};
-  if(req.body.locationId) condition.locationId = {[Op.or]: req.body.locationId};
+  if(req.body.sectionId) condition.sectionId = {[Op.or]: req.body.sectionId};
   if(req.body.versionId) condition.versionId = {[Op.or]: req.body.versionId};
 
   SimpleText.findAll({ where: condition })
@@ -59,31 +60,12 @@ exports.find = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  if (!req.body.versionId) {
-    res.status(400).send({
-      message: "VersionId can not be empty!"
-    });
-    return;
-  }
-  if (!req.body.locationId) {
-    res.status(400).send({
-      message: "Value can not be empty!"
-    });
-    return;
-  }
+  const id = req.params.id;
 
-  changes = {
-    value: req.body.value
-  }
-
-  condition = {
-    locationId: +req.body.locationId,
-    versionId: +req.body.versionId
-  }; 
- 
-  SimpleText.update(changes, {
-    where: condition
-  }).then(num => {
+  SimpleText.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
       if (num == 1) {
         res.send({
           message: "SimpleText was updated successfully."
@@ -100,6 +82,5 @@ exports.update = (req, res) => {
       });
     });
 };
-
 
 
