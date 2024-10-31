@@ -7,7 +7,7 @@ let message = "łączymy się z bazą danych...";
 const app = express();
 
 var corsOptions = {
-  origin: ["http://localhost:4200"],
+  origin: ["http://localhost:4200", "http://localhost:5000"],
   optionsSuccessStatus: 200
 };
 

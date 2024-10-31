@@ -83,4 +83,28 @@ exports.update = (req, res) => {
     });
 };
 
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  SimpleText.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "SimpleText was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete SimpleText with id=${id}. Maybe SimpleText was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete SimpleText with id=" + id
+      });
+    });
+};
+
 

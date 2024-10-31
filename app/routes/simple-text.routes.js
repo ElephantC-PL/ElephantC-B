@@ -9,5 +9,7 @@ module.exports = app => {
 
     router.put("/:id", simpleTexts.update);
 
+    router.delete("/:id", simpleTexts.delete);
+
     app.use('/api/simple-texts', router);
   };
