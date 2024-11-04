@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require("cors");
+const settings = require("./app/config/settings");
 const port = 3000
 
 let message = "łączymy się z bazą danych...";
@@ -7,7 +8,7 @@ let message = "łączymy się z bazą danych...";
 const app = express();
 
 var corsOptions = {
-  origin: ["http://localhost:4200", "http://localhost:5000"],
+  origin: settings.ORIGINS,
   optionsSuccessStatus: 200
 };
 

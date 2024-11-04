@@ -11,5 +11,5 @@ module.exports = app => {
 
     router.delete("/:id", simpleTexts.delete);
 
-    app.use('/api/simple-texts', router);
+    app.use('/simple-texts', router);
   };

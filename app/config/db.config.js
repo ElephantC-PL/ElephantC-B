@@ -1,8 +1,10 @@
+const settings = require("./settings.js");
+
 module.exports = {
-  HOST: "localhost",
-  USER: "root",
-  PASSWORD: "secred",
-  DB: "elephantc-test",
+  HOST: settings.HOST,
+  USER: settings.USER,
+  PASSWORD: settings.PASSWORD,
+  DB: settings.DB,
   dialect: "mysql",
   pool: {
     max: 5,
