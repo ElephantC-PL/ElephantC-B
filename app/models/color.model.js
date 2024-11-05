@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const SimpleText = sequelize.define("simple-text", {      
+    const Color = sequelize.define("color", {      
         sectionId: {
             type: Sequelize.INTEGER,            
         },
@@ -12,7 +12,7 @@ module.exports = (sequelize, Sequelize) => {
         value: {
             type: Sequelize.STRING
         }
-    },{ tableName: 'content.simple-text'});
+    },{ tableName: 'content.color'});
 
-    return SimpleText;
+    return Color;
 };
