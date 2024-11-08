@@ -21,5 +21,6 @@ db.sequelize = sequelize;
 
 db.simpleTexts = require("./simple-text.model.js")(sequelize, Sequelize);
 db.colors = require("./color.model.js")(sequelize, Sequelize);
+db.richTexts = require("./rich-text.model.js")(sequelize, Sequelize);
 
 module.exports = db;

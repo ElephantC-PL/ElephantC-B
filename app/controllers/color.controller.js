@@ -6,7 +6,7 @@ const Op = db.Sequelize.Op;
 exports.create = (req, res) => {
   if (!req.body.sectionId) {
     res.status(400).send({
-      message: "LocationId can not be empty!"
+      message: "SectionId can not be empty!"
     });
     return;
   }
@@ -18,7 +18,7 @@ exports.create = (req, res) => {
   }
   if (!req.body.location) {
     res.status(400).send({
-      message: "Value can not be empty!"
+      message: "Location can not be empty!"
     });
     return;
   }

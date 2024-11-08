@@ -14,10 +14,8 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 const db = require("./app/models");
@@ -36,6 +34,7 @@ app.get('/', (req, res) => {
 
 require("./app/routes/simple-text.routes")(app);
 require("./app/routes/color.routes")(app);
+require("./app/routes/rich-text.routes")(app);
 
 app.listen(port, () => {
   console.log(message)

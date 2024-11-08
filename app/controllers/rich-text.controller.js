@@ -1,5 +1,5 @@
 const db = require("../models");
-const SimpleText = db.simpleTexts;
+const RichText = db.richTexts;
 const Op = db.Sequelize.Op;
 
 
@@ -23,21 +23,21 @@ exports.create = (req, res) => {
     return;
   }
 
-  const simpleText = {
+  const richText = {
     sectionId: req.body.sectionId,
     versionId: req.body.versionId,
     location: req.body.location,
     value: req.body.value
   };
   
-  SimpleText.create(simpleText)
+  RichText.create(richText)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the SimpleText."
+          err.message || "Some error occurred while creating the RichText."
       });
     });
 };
@@ -47,14 +47,14 @@ exports.find = (req, res) => {
   if(req.body.sectionId) condition.sectionId = {[Op.or]: req.body.sectionId};
   if(req.body.versionId) condition.versionId = {[Op.or]: req.body.versionId};
 
-  SimpleText.findAll({ where: condition })
+  RichText.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving SimpleText."
+          err.message || "Some error occurred while retrieving RichText."
       });
     });
 }
@@ -62,23 +62,23 @@ exports.find = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  SimpleText.update(req.body, {
+  RichText.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "SimpleText was updated successfully."
+          message: "RichText was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update SimpleText with id=${id}. Maybe SimpleText was not found or req.body is empty!`
+          message: `Cannot update RichText with id=${id}. Maybe RichText was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating SimpleText with id=" + id
+        message: "Error updating RichText with id=" + id
       });
     });
 };
@@ -86,23 +86,23 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  SimpleText.destroy({
+  RichText.destroy({
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "SimpleText was deleted successfully!"
+          message: "RichText was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete SimpleText with id=${id}. Maybe SimpleText was not found!`
+          message: `Cannot delete RichText with id=${id}. Maybe RichText was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete SimpleText with id=" + id
+        message: "Could not delete RichText with id=" + id
       });
     });
 };
