@@ -16,9 +16,9 @@ exports.create = (req, res) => {
     });
     return;
   }
-  if (!req.body.location) {
+  if (!req.body.locationId) {
     res.status(400).send({
-      message: "Location can not be empty!"
+      message: "LocationId can not be empty!"
     });
     return;
   }
@@ -26,7 +26,7 @@ exports.create = (req, res) => {
   const simpleText = {
     sectionId: req.body.sectionId,
     versionId: req.body.versionId,
-    location: req.body.location,
+    locationId: req.body.locationId,
     value: req.body.value
   };
   
@@ -46,6 +46,7 @@ exports.find = (req, res) => {
   condition = {};
   if(req.body.sectionId) condition.sectionId = {[Op.or]: req.body.sectionId};
   if(req.body.versionId) condition.versionId = {[Op.or]: req.body.versionId};
+  if(req.body.locationId) condition.locationId = {[Op.or]: req.body.locationId};
 
   SimpleText.findAll({ where: condition })
     .then(data => {

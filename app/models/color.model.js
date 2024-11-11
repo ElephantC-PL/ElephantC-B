@@ -6,9 +6,9 @@ module.exports = (sequelize, Sequelize) => {
         versionId: {
             type: Sequelize.INTEGER,         
         },
-        location: {
-            type: Sequelize.STRING,         
-        },
+        locationId: {
+            type: Sequelize.INTEGER,         
+        },        
         value: {
             type: Sequelize.STRING
         }
