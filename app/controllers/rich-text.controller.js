@@ -27,7 +27,7 @@ exports.create = (req, res) => {
     sectionId: req.body.sectionId,
     versionId: req.body.versionId,
     locationId: req.body.locationId,
-    value: req.body.value
+    value: JSON.stringify(req.body.value)
   };
   
   RichText.create(richText)
@@ -49,9 +49,15 @@ exports.find = (req, res) => {
   if(req.body.locationId) condition.locationId = {[Op.or]: req.body.locationId};
 
   RichText.findAll({ where: condition })
-    .then(data => {
-      res.send(data);
-    })
+  .then(data => {     
+    const processedData = data.map(item => {       
+      const plainItem = item.toJSON();
+      plainItem.value = JSON.parse(plainItem.value)        
+      return plainItem;
+    });
+
+    res.send(processedData);
+  })
     .catch(err => {
       res.status(500).send({
         message:
@@ -62,6 +68,8 @@ exports.find = (req, res) => {
 
 exports.update = (req, res) => {
   const id = req.params.id;
+
+  if(req.body.value) req.body.value = JSON.stringify(req.body.value);
 
   RichText.update(req.body, {
     where: { id: id }
