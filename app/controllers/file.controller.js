@@ -1,5 +1,5 @@
 const db = require("../models");
-const Image = db.images;
+const File = db.files;
 const Op = db.Sequelize.Op;
 
 const multer = require('multer');
@@ -32,49 +32,35 @@ exports.create = (req, res) => {
     });
     return;
   }
-  if (!req.body.value.width) {
-    res.status(400).send({
-      message: "Width can not be empty!"
-    });
-    return;
-  }
-  if (!req.body.value.height) {
-    res.status(400).send({
-      message: "Height can not be empty!"
-    });
-    return;
-  }
   if (!req.body.value.fileName) {
     res.status(400).send({
       message: "FileName can not be empty!"
     });
     return;
   }
-  if (!req.body.value.alt) {
+  if (!req.body.value.linkText) {
     res.status(400).send({
-      message: "Alt can not be empty!"
+      message: "LinkText can not be empty!"
     });
     return;
   }
 
-  const image = {
+  const file = {
     sectionId: req.body.sectionId,
     versionId: req.body.versionId,   
     locationId: req.body.locationId,
-    width: req.body.value.width,
-    height:  req.body.value.height,
     fileName: req.body.value.fileName,
-    alt: req.body.value.alt
+    linkText: req.body.value.linkText
   };
   
-  Image.create(image)
+  File.create(file)
     .then(data => {
       res.send(data);
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Image."
+          err.message || "Some error occurred while creating the File."
       });
     });
 };
@@ -85,25 +71,23 @@ exports.find = (req, res) => {
   if(req.body.versionId) condition.versionId = {[Op.or]: req.body.versionId};
   if(req.body.locationId) condition.locationId = {[Op.or]: req.body.locationId};
 
-  Image.findAll({ where: condition })
-    .then(data => {     
-      const processedData = data.map(item => {       
-        const plainItem = item.toJSON();
-        plainItem.value = {
-          width: plainItem.width,
-          height: plainItem.height,
-          fileName: plainItem.fileName,
-          alt: plainItem.alt
-        }; 
-        return plainItem;
-      });
+  File.findAll({ where: condition })
+  .then(data => {     
+    const processedData = data.map(item => {       
+      const plainItem = item.toJSON();
+      plainItem.value = {       
+        fileName: plainItem.fileName,
+        linkText: plainItem.linkText
+      }; 
+      return plainItem;
+    });
 
-      res.send(processedData);
-    })
+    res.send(processedData);
+  })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving Image."
+          err.message || "Some error occurred while retrieving File."
       });
     });
 }
@@ -112,28 +96,26 @@ exports.update = (req, res) => {
   const id = req.params.id;
   const data = req.body;   
 
-  if(req.body.value.width) data.width = req.body.value.width;
-  if(req.body.value.height) data.height = req.body.value.height;
   if(req.body.value.fileName) data.fileName = req.body.value.fileName;
-  if(req.body.value.alt) data.alt = req.body.value.alt;
+  if(req.body.value.linkText) data.alt = req.body.value.linkText;
 
-  Image.update(data, {
+  File.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Image was updated successfully."
+          message: "File was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Image with id=${id}. Maybe Image was not found or req.body is empty!`
+          message: `Cannot update File with id=${id}. Maybe File was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Image with id=" + id
+        message: "Error updating File with id=" + id
       });
     });
 };
@@ -141,33 +123,35 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Image.destroy({
+  File.destroy({
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Image was deleted successfully!"
+          message: "File was deleted successfully!"
         });
       } else {
         res.send({
-          message: `Cannot delete Image with id=${id}. Maybe Image was not found!`
+          message: `Cannot delete File with id=${id}. Maybe File was not found!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Image with id=" + id
+        message: "Could not delete File with id=" + id
       });
     });
 };
 
 exports.uploadMethod = (req, res) => {
   if (req.file) {
-    res.status(200).json({ message: 'Image uploaded successfully' });
+    res.status(200).json({ message: 'File uploaded successfully' });
   } else {
-    res.status(400).json({ message: 'No Image uploaded' });
+    res.status(400).json({ message: 'No file uploaded' });
   }
 }
 
 exports.uploadStorage = multer({ storage });
+
+
