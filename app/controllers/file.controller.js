@@ -20,9 +20,9 @@ exports.create = (req, res) => {
     });
     return;
   }
-  if (!req.body.versionId) {
+  if (!req.body.statusId) {
     res.status(400).send({
-      message: "VersionId can not be empty!"
+      message: "StatusId can not be empty!"
     });
     return;
   }
@@ -47,7 +47,8 @@ exports.create = (req, res) => {
 
   const file = {
     sectionId: req.body.sectionId,
-    versionId: req.body.versionId,   
+    statusId: req.body.statusId,
+    variantId: req.body.variantId,  
     locationId: req.body.locationId,
     fileName: req.body.value.fileName,
     linkText: req.body.value.linkText
@@ -68,14 +69,15 @@ exports.create = (req, res) => {
 exports.find = (req, res) => {
   condition = {};
   if(req.body.sectionId) condition.sectionId = {[Op.or]: req.body.sectionId};
-  if(req.body.versionId) condition.versionId = {[Op.or]: req.body.versionId};
+  if(req.body.statusId) condition.statusId = {[Op.or]: req.body.statusId};
+  if(req.body.variantId) condition.variantId = {[Op.or]: req.body.variantId};
   if(req.body.locationId) condition.locationId = {[Op.or]: req.body.locationId};
 
   File.findAll({ where: condition })
   .then(data => {     
     const processedData = data.map(item => {       
       const plainItem = item.toJSON();
-      plainItem.value = {       
+      plainItem.value = {
         fileName: plainItem.fileName,
         linkText: plainItem.linkText
       }; 

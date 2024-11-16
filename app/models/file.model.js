@@ -3,7 +3,10 @@ module.exports = (sequelize, Sequelize) => {
         sectionId: {
             type: Sequelize.INTEGER,            
         },
-        versionId: {
+        statusId: {
+            type: Sequelize.INTEGER,         
+        },
+        variantId: {
             type: Sequelize.INTEGER,         
         },
         locationId: {
