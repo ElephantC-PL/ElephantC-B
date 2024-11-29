@@ -25,5 +25,6 @@ db.richTexts = require("./rich-text.model.js")(sequelize, Sequelize);
 db.images = require("./image.model.js")(sequelize, Sequelize);
 db.files = require("./file.model.js")(sequelize, Sequelize);
 db.embedHtmls = require("./embed-html.model.js")(sequelize, Sequelize);
+db.collections = require("./collection.model.js")(sequelize, Sequelize);
 
 module.exports = db;

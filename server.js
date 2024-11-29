@@ -39,6 +39,7 @@ require("./app/routes/rich-text.routes")(app);
 require("./app/routes/image.routes")(app);
 require("./app/routes/file.routes")(app);
 require("./app/routes/embed-html.routes")(app);
+require("./app/routes/collection.routes")(app);
 
 app.use('/img', express.static(path.join(__dirname, 'img')));
 app.use('/file', express.static(path.join(__dirname, 'file')));
