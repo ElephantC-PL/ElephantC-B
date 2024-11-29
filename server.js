@@ -38,9 +38,10 @@ require("./app/routes/color.routes")(app);
 require("./app/routes/rich-text.routes")(app);
 require("./app/routes/image.routes")(app);
 require("./app/routes/file.routes")(app);
+require("./app/routes/embed-html.routes")(app);
 
 app.use('/img', express.static(path.join(__dirname, 'img')));
-app.use('/files', express.static(path.join(__dirname, 'files')));
+app.use('/file', express.static(path.join(__dirname, 'file')));
 
 app.listen(port, () => {
   console.log(message)
