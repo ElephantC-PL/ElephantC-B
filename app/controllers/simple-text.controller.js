@@ -28,6 +28,7 @@ exports.create = (req, res) => {
     statusId: req.body.statusId,
     variantId: req.body.variantId,
     locationId: req.body.locationId,
+    collectionId: req.body.collectionId,
     value: req.body.value
   };
   
@@ -49,6 +50,7 @@ exports.find = (req, res) => {
   if(req.body.statusId) condition.statusId = {[Op.or]: req.body.statusId};
   if(req.body.variantId) condition.variantId = {[Op.or]: req.body.variantId};
   if(req.body.locationId) condition.locationId = {[Op.or]: req.body.locationId};
+  if(req.body.collectionId) condition.collectionId = {[Op.or]: req.body.collectionId};
 
   SimpleText.findAll({ where: condition })
     .then(data => {

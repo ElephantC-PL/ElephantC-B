@@ -1,28 +1,36 @@
 module.exports = (sequelize, Sequelize) => {
     const Image = sequelize.define("image", {      
         sectionId: {
-            type: Sequelize.INTEGER,            
+            type: Sequelize.INTEGER,   
+            allowNull: false,         
         },
         statusId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,     
+            allowNull: false,    
         },
         variantId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,     
+            allowNull: false,    
         },
         locationId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,     
+            allowNull: false,    
         },    
         width: {
-            type: Sequelize.INTEGER,            
+            type: Sequelize.INTEGER,     
+            allowNull: false,       
         },
         height: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,     
+            allowNull: false,    
         },    
         fileName: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
         },    
         alt: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
         }
     },{ tableName: 'content.image'});
 

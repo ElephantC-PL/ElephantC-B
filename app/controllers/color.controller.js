@@ -52,7 +52,7 @@ exports.find = (req, res) => {
 
   Color.findAll({ where: condition })
     .then(data => {
-      res.send(data);
+      res.send(data);      
     })
     .catch(err => {
       res.status(500).send({

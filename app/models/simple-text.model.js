@@ -1,19 +1,30 @@
+const { col } = require("sequelize");
+
 module.exports = (sequelize, Sequelize) => {
     const SimpleText = sequelize.define("simple-text", {      
         sectionId: {
-            type: Sequelize.INTEGER,            
+            type: Sequelize.INTEGER,
+            allowNull: false,                
         },
         statusId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,
+            allowNull: false,      
         },
         variantId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER, 
+            allowNull: false,        
         },
         locationId: {
-            type: Sequelize.INTEGER,         
-        },       
+            type: Sequelize.INTEGER, 
+            allowNull: false,        
+        },
+        collectionId: {
+            type: Sequelize.INTEGER,
+            allowNull: true,
+        },
         value: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: true,
         }
     },{ tableName: 'content.simple-text'});
 

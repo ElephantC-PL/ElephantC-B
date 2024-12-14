@@ -1,19 +1,24 @@
 module.exports = (sequelize, Sequelize) => {
     const EmbedHtml = sequelize.define("embed-html", {      
         sectionId: {
-            type: Sequelize.INTEGER,            
+            type: Sequelize.INTEGER, 
+            allowNull: false,           
         },
         statusId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,    
+            allowNull: false,     
         },
         variantId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,     
+            allowNull: false,    
         },
         locationId: {
-            type: Sequelize.INTEGER,         
+            type: Sequelize.INTEGER,    
+            allowNull: false,     
         },       
         value: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: true,
         }
     },{ tableName: 'content.embed-html'});
 

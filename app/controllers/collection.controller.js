@@ -26,7 +26,7 @@ exports.create = (req, res) => {
   const collection = {
     sectionId: req.body.sectionId,
     statusId: req.body.statusId,
-    variantId: req.body.variantId,   
+    variantId: req.body.variantId,
     locationId: req.body.locationId,
     value: req.body.value
   };
