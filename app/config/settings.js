@@ -13,11 +13,11 @@ if (set === 'local') {
     }
 } else if (set === 'zlotPoziomek') {
     settings = {
-        HOST: "api.zlotpoziomek.pl",
+        HOST: "elephantc.api.kubaadamczyk.pl",
         USER: "adamczyk_elephantc",
         PASSWORD: "DPSVcBdq6cesKJbDmRSK",
         DB: "adamczyk_elephantc",
-        ORIGINS: ["http://www.demo.zlotpoziomek.pl", "http://www.elephantc.adamczyk.stronawcal.pl"]
+        ORIGINS: ["http://localhost:4200", "http://localhost:5000","http://www.demo.zlotpoziomek.pl", "http://www.elephantc.kubaadamczyk.pl"]
     }
 }
 
